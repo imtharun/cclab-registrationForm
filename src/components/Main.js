@@ -1,13 +1,14 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Form from "./Form";
+import { motion } from "framer-motion";
 
 function Main() {
   return (
-    <div>
+    <motion.div>
       <Navbar />
       <Form />
-    </div>
+    </motion.div>
   );
 }
 

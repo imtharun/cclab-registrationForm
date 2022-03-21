@@ -1,4 +1,8 @@
 import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import "atropos/css";
+import Atropos from "atropos/react";
+import Typed from "./Typical";
 
 function Form() {
   //Refs
@@ -21,110 +25,208 @@ function Form() {
     console.log(setName, setRollno, setPhoneno, setDepartment, setInterest);
   };
 
+  const list = {
+    visible: { opacity: 1, transition: { staggerChildren: 0.3 } },
+    hidden: { opacity: 0 },
+  };
+
+  const item = {
+    visible: {
+      opacity: 1,
+      transition: {},
+    },
+    hidden: { opacity: 0 },
+  };
+
+  const rocket = {
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotate: 0,
+      transition: {
+        duration: 2,
+        delay: 1.5,
+      },
+    },
+    hidden: { opacity: 0, x: -500, y: 500, rotate: -30 },
+  };
+
   return (
-    <div className="font-Mons bg-grad w-full text-white flex justify-center items-center py-20 px-5">
-      <form
+    <motion.div
+      className="font-Mono bg-grad w-full  text-white flex justify-center items-center py-20 px-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <motion.form
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
         onSubmit={submitHandler}
-        className="bg-white w-full text-black px-6 pt-4 pb-10  max-w-xl sixTen:pt-4 sixTen:pb-10  sixTen:px-16 relative  border-none"
+        className="bg-white shadow-2xl w-full rounded-md text-black max-w-xl relative border-none"
       >
-        <div className="absolute -top-5 right-0 z-10 sixTen:right-8">
-          <svg
-            width="120"
-            height="80"
-            viewBox="0 0 120 80"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <motion.div
+          className="px-6 pt-4 z-100 sixTen:pt-4 sixTen:px-16"
+          initial="hidden"
+          animate="visible"
+          variants={list}
+        >
+          <motion.div
+            className="absolute -top-5 right-0 sixTen:right-8"
+            initial="hidden"
+            animate="visible"
+            variants={rocket}
           >
-            <path
-              d="M29.3881 33.1579L99.9995 0L41.4437 39.4736L75.8883 59.9999L99.9995 0L0 18.9473L29.3881 33.1579Z"
-              fill="#7383BF"
+            <svg
+              width="120"
+              height="80"
+              viewBox="0 0 120 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M29.3881 33.1579L99.9995 0L41.4437 39.4736L75.8883 59.9999L99.9995 0L0 18.9473L29.3881 33.1579Z"
+                fill="#7383BF"
+              />
+              <path
+                d="M41.4437 39.4736L34.6638 59.9999L29.3881 33.1579L99.9995 0L41.4437 39.4736Z"
+                fill="#556080"
+              />
+              <path
+                d="M41.4437 39.4736L34.5547 60L54.9596 47.5279L41.4437 39.4736Z"
+                fill="#464F66"
+              />
+            </svg>
+          </motion.div>
+
+          <Typed />
+
+          <motion.div
+            variants={item}
+            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
+          >
+            <input
+              ref={nameRef}
+              value={setName}
+              type="text"
+              onChange={() => setNameHandler(nameRef.current.value)}
+              placeholder="Name"
+              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
             />
-            <path
-              d="M41.4437 39.4736L34.6638 59.9999L29.3881 33.1579L99.9995 0L41.4437 39.4736Z"
-              fill="#556080"
+          </motion.div>
+
+          <motion.div
+            variants={item}
+            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
+          >
+            <input
+              type="text"
+              ref={rollnoRef}
+              value={setRollno}
+              onChange={() => setRollnoHandler(rollnoRef.current.value)}
+              placeholder="Rollno"
+              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
             />
-            <path
-              d="M41.4437 39.4736L34.5547 60L54.9596 47.5279L41.4437 39.4736Z"
-              fill="#464F66"
+          </motion.div>
+
+          <motion.div
+            variants={item}
+            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
+          >
+            <input
+              ref={phonenoRef}
+              value={setPhoneno}
+              onChange={() => setPhonenoHandler(phonenoRef.current.value)}
+              type="text"
+              placeholder="Phone number"
+              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
             />
-          </svg>
-        </div>
-        <h1 className="text-xl my-5 font-bold">Register !</h1>
+          </motion.div>
 
-        <div className="w-full mb-6 rounded-md bg-gray-50 px-4 ring-2 ring-gray-200">
-          <input
-            ref={nameRef}
-            value={setName}
-            type="text"
-            onChange={() => setNameHandler(nameRef.current.value)}
-            placeholder="Name"
-            className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-          />
-        </div>
+          <motion.div
+            variants={item}
+            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
+          >
+            <input
+              ref={deptRef}
+              value={setDepartment}
+              onChange={() => setDepartmentHandler(deptRef.current.value)}
+              type="text"
+              placeholder="Department"
+              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+            />
+          </motion.div>
 
-        <div className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200">
-          <input
-            type="text"
-            ref={rollnoRef}
-            value={setRollno}
-            onChange={() => setRollnoHandler(rollnoRef.current.value)}
-            placeholder="Rollno"
-            className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-          />
-        </div>
+          <motion.div
+            variants={item}
+            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
+          >
+            <textarea
+              ref={interestRef}
+              value={setInterest}
+              onChange={() => setInterestHandler(interestRef.current.value)}
+              type="text"
+              placeholder="Interest"
+              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+            />
+          </motion.div>
+          <Atropos
+            className="my-atropos"
+            activeOffset={40}
+            shadowScale={0}
+            rotateTouch={true}
+          >
+            <motion.button
+              className="w-full border-transparent rounded-2xl bg-[#176698] py-3 font-bold text-white hover:border-[#176698] border-2 hover:bg-white hover:text-[#176698] transition-colors"
+              whileTap={{ scale: 0.95 }}
+            >
+              Submit
+            </motion.button>
+          </Atropos>
+        </motion.div>
 
-        <div className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200">
-          <input
-            ref={phonenoRef}
-            value={setPhoneno}
-            onChange={() => setPhonenoHandler(phonenoRef.current.value)}
-            type="text"
-            placeholder="Phone number"
-            className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-          />
-        </div>
-
-        <div className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200">
-          <input
-            ref={deptRef}
-            value={setDepartment}
-            onChange={() => setDepartmentHandler(deptRef.current.value)}
-            type="text"
-            placeholder="Department"
-            className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-          />
-        </div>
-
-        <div className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200">
-          <textarea
-            ref={interestRef}
-            value={setInterest}
-            onChange={() => setInterestHandler(interestRef.current.value)}
-            type="text"
-            placeholder="Interest"
-            className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-          />
-        </div>
-        <button className="w-full border-2 border-transparent mb-6 rounded-2xl bg-[#176698] py-3 font-bold text-white hover:border-[#176698] hover:border-2 hover:bg-white hover:text-[# #e5e7eb] transition-colors">
-          Submit
-        </button>
-        <div className="absolute bottom-0 left-0 w-full -z-2">
+        <div className="w-full z-10 -mt-5 relative -bottom-1 rounded-md">
           <svg
+            className="rounded-b-md"
             // width="677"
             // height="197"
-            viewBox="0 0 677 197"
+            viewBox="0 0 670 195"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              d="M676 73.1658C555.591 127.759 101.5 98.0251 1 2V196H676V73.1658Z"
+            <motion.path
+              d="M676 73.1658C555.600 127 111 200 -1 2V196H676V73.1658Z"
+              animate={{
+                d: [
+                  "M676 73.1658C555.600 150 123.5 110 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 100 100 100 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 10 100 200 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 70 120 250 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 100 120.5 200 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 150 101.5 200 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 145 108 200 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 135 139 200 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 200 140 100 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 100 120.5 200 -1 2V196H676V73.1658Z",
+                  "M676 73.1658C555.600 150 101.5 200 -1 2V196H676V73.1658Z",
+                ],
+              }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "reverse",
+                duration: 20,
+                times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+                type: "tween",
+                ease: "easeInOut",
+              }}
               fill="#176698"
               stroke="#176698"
             />
           </svg>
         </div>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>
   );
 }
 
