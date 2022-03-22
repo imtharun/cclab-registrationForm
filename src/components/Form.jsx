@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import "atropos/css";
 import Atropos from "atropos/react";
-import Typed from "./Typical";
+import { init } from "ityped";
 
 function Form() {
   //Refs
@@ -11,6 +11,7 @@ function Form() {
   const phonenoRef = useRef("");
   const deptRef = useRef("");
   const interestRef = useRef("");
+  const typeRef = useRef("");
 
   // States
   const [setName, setNameHandler] = useState("");
@@ -18,6 +19,15 @@ function Form() {
   const [setPhoneno, setPhonenoHandler] = useState("");
   const [setDepartment, setDepartmentHandler] = useState("");
   const [setInterest, setInterestHandler] = useState("");
+
+  useEffect(() => {
+    init(typeRef.current, {
+      showCursor: true,
+      backSpeed: 60,
+      backDelay: 2000,
+      strings: ["Do register soon!", "Registrations are closing!"],
+    });
+  }, []);
 
   // Submit handler
   const submitHandler = (event) => {
@@ -100,7 +110,9 @@ function Form() {
             </svg>
           </motion.div>
 
-          <Typed />
+          <div className="text-2xl my-6 font-bold text-[#013A63]">
+            <span ref={typeRef}></span>
+          </div>
 
           <motion.div
             variants={item}
@@ -167,7 +179,7 @@ function Form() {
               value={setInterest}
               onChange={() => setInterestHandler(interestRef.current.value)}
               type="text"
-              placeholder="Interest"
+              placeholder="Interests"
               className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
             />
           </motion.div>
