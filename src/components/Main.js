@@ -1,14 +1,14 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Form from "./Form";
-import { motion } from "framer-motion";
+import React, { Suspense } from "react";
+import Loader from "./Loader";
+const Navbar = React.lazy(() => import("./Navbar"));
+const Form = React.lazy(() => import("./Form"));
 
 function Main() {
   return (
-    <motion.div>
+    <Suspense fallback={<Loader />}>
       <Navbar />
       <Form />
-    </motion.div>
+    </Suspense>
   );
 }
 

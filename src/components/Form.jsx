@@ -110,8 +110,8 @@ function Form() {
             </svg>
           </motion.div>
 
-          <div className="text-2xl my-6 font-bold text-[#013A63]">
-            <span ref={typeRef}></span>
+          <div className="text-2xl my-9 font-bold text-[#013A63]">
+            <span ref={typeRef} className="smooth"></span>
           </div>
 
           <motion.div
@@ -181,6 +181,7 @@ function Form() {
               type="text"
               placeholder="Interests"
               className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+              rows={3}
             />
           </motion.div>
           <Atropos
@@ -198,7 +199,7 @@ function Form() {
           </Atropos>
         </motion.div>
 
-        <div className="w-full z-10 -mt-5 relative -bottom-1 rounded-md">
+        <div className="w-full z-10 text-sm -mt-5 relative -bottom-1 rounded-md">
           <svg
             className="rounded-b-md"
             // width="677"
