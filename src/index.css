@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,11 +12,7 @@
 }
 
 .bg-grad {
-  background: linear-gradient(
-    359.69deg,
-    #176698 3.03%,
-    #a9d6e500 99.49%
-  );
+  background: linear-gradient(359.69deg, #176698 3.03%, #a9d6e500 99.49%);
 }
 
 .ityped-cursor {
@@ -26,6 +22,11 @@
   -moz-animation: blink 0.3s infinite;
   animation: blink 0.3s infinite;
   animation-direction: alternate;
+}
+
+.ring-gray-200 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity));
 }
 
 @keyframes blink {

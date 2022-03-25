@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import "atropos/css";
 import Atropos from "atropos/react";
 import { init } from "ityped";
+import TextareaAutosize from "react-textarea-autosize";
 
 function Form() {
   //Refs
@@ -20,6 +21,10 @@ function Form() {
   const [setDepartment, setDepartmentHandler] = useState("");
   const [setInterest, setInterestHandler] = useState("");
 
+  const [isName, setIsName] = useState(false);
+  const [isRollno, setIsRollno] = useState(false);
+  const [isPhoneno, setIsPhoneno] = useState(false);
+
   useEffect(() => {
     init(typeRef.current, {
       showCursor: true,
@@ -28,6 +33,48 @@ function Form() {
       strings: ["Do register soon!", "Registrations are closing!"],
     });
   }, []);
+
+  useEffect(() => {
+    if (!setName.match("^[a-zA-Z_ .]*$")) {
+      setIsName(true);
+    } else {
+      setIsName(false);
+    }
+  }, [setName]);
+
+  useEffect(() => {
+    if (!setPhoneno.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
+      if (setPhoneno === "") {
+        setIsPhoneno(false);
+        return;
+      }
+      setIsPhoneno(true);
+    } else {
+      setIsPhoneno(false);
+    }
+  }, [setPhoneno]);
+
+  useEffect(() => {
+    console.log("Inside useEffect");
+    console.log(
+      "First regex : " + !setRollno.match("[2][1][A-Z||a-z][0-9]{3}")
+    );
+    console.log(
+      "Second regex: " + !setRollno.match("[2][1][A-Z||a-z]{2}[0-9]{2}")
+    );
+    if (
+      !setRollno.match("[2][1][A-Z||a-z][0-9]{3}$") &&
+      !setRollno.match("[2][1][A-Z||a-z]{2}[0-9]{2}$")
+    ) {
+      if (setRollno === "") {
+        setIsRollno(false);
+        return;
+      }
+      setIsRollno(true);
+    } else {
+      setIsRollno(false);
+    }
+  }, [setRollno]);
 
   // Submit handler
   const submitHandler = (event) => {
@@ -64,7 +111,7 @@ function Form() {
 
   return (
     <motion.div
-      className="font-Mono bg-grad w-full  text-white flex justify-center items-center py-20 px-5"
+      className="font-Mono bg-grad w-full  flex justify-center items-center py-20 px-5"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -74,7 +121,7 @@ function Form() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1 }}
         onSubmit={submitHandler}
-        className="bg-white shadow-2xl w-full rounded-md text-black max-w-xl relative border-none"
+        className="bg-white shadow-2xl  w-full rounded-xl text-black max-w-xl relative border-none"
       >
         <motion.div
           className="px-6 pt-4 z-100 sixTen:pt-4 sixTen:px-16"
@@ -110,78 +157,86 @@ function Form() {
             </svg>
           </motion.div>
 
-          <div className="text-2xl my-9 font-bold text-[#013A63]">
+          <div className="text-2xl h-10 my-11 sixTen:my-9 font-bold text-[#013A63] transition-all ease-in-out duration-300">
             <span ref={typeRef} className="smooth"></span>
           </div>
 
-          <motion.div
-            variants={item}
-            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
-          >
+          <motion.div className="relative mb-4" variants={item}>
             <input
               ref={nameRef}
               value={setName}
               type="text"
               onChange={() => setNameHandler(nameRef.current.value)}
               placeholder="Name"
-              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+              className={`bg-transparent relative font-medium outline-none focus:outline-none w-full mb-6 rounded-2xl bg-gray-50 p-3 ring-2 ${
+                isName ? "ring-red-500" : "ring-gray-200"
+              } border-2 border-transparent`}
             />
+            {isName && (
+              <span className="text-red-500 font-medium absolute right-2 top-[3.8rem] ">
+                Invalid Name
+              </span>
+            )}
           </motion.div>
 
-          <motion.div
-            variants={item}
-            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
-          >
+          <motion.div className="relative mb-4" variants={item}>
             <input
               type="text"
               ref={rollnoRef}
               value={setRollno}
               onChange={() => setRollnoHandler(rollnoRef.current.value)}
               placeholder="Rollno"
-              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+              className={`bg-transparent relative font-medium outline-none focus:outline-none w-full mb-6 rounded-2xl bg-gray-50 p-3 ring-2 ${
+                isRollno ? "ring-red-500" : "ring-gray-200"
+              } border-2 border-transparent`}
             />
+            {isRollno && (
+              <span className="text-red-500 font-medium absolute right-2 top-[3.8rem] ">
+                Invalid Rollno
+              </span>
+            )}
           </motion.div>
 
-          <motion.div
-            variants={item}
-            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
-          >
+          <motion.div variants={item} className="relative mb-4">
             <input
               ref={phonenoRef}
               value={setPhoneno}
               onChange={() => setPhonenoHandler(phonenoRef.current.value)}
               type="text"
               placeholder="Phone number"
-              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+              className={`bg-transparent relative font-medium outline-none focus:outline-none w-full mb-6 rounded-2xl bg-gray-50 p-3 ring-2 ${
+                isPhoneno ? "ring-red-500" : "ring-gray-200"
+              } border-2 border-transparent`}
             />
+            {isPhoneno && (
+              <span className="text-red-500 font-medium absolute right-2 top-[3.8rem] ">
+                Invalid Phone Number
+              </span>
+            )}
           </motion.div>
 
-          <motion.div
-            variants={item}
-            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
-          >
+          <motion.div variants={item} className="relative mb-4">
             <input
               ref={deptRef}
               value={setDepartment}
               onChange={() => setDepartmentHandler(deptRef.current.value)}
               type="text"
-              placeholder="Department"
-              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+              placeholder="Department (Ex. IT, CSE)"
+              className="font-medium bg-transparent outline-none focus:outline-none w-full relative mb-6 p-3 rounded-2xl bg-gray-50 border-2 border-transparent ring-2 ring-gray-200"
             />
           </motion.div>
 
-          <motion.div
-            variants={item}
-            className="w-full mb-6 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200"
-          >
-            <textarea
+          <motion.div variants={item} className="relative mb-4">
+            <TextareaAutosize
               ref={interestRef}
-              value={setInterest}
-              onChange={() => setInterestHandler(interestRef.current.value)}
-              type="text"
+              onChange={() => {
+                setInterestHandler(interestRef.current.value);
+              }}
+              minRows={3}
               placeholder="Interests"
-              className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-              rows={3}
+              maxRows={12}
+              className="relative rounded-2xl bg-gray-50 p-3 ring-2 ring-gray-200 w-full font-medium bg-transparent outline-none focus:outline-none resize-none border-2 border-transparent"
+              required
             />
           </motion.div>
           <Atropos
@@ -244,3 +299,13 @@ function Form() {
 }
 
 export default Form;
+
+//  <textarea
+//   ref={interestRef}
+//   value={setInterest}
+//   onChange={() => setInterestHandler(interestRef.current.value)}
+//   type="text"
+//   placeholder="Interests"
+//   className="my-3 w-full font-medium border-none bg-transparent outline-none focus:outline-none min-h-fit"
+//   rows={3}
+// />
