@@ -168,6 +168,7 @@ function Form() {
               type="text"
               onChange={() => setNameHandler(nameRef.current.value)}
               placeholder="Name"
+              required
               className={`bg-transparent relative font-medium outline-none focus:outline-none w-full mb-6 rounded-2xl bg-gray-50 p-3 ring-2 ${
                 isName ? "ring-red-500" : "ring-gray-200"
               } border-2 border-transparent`}
@@ -186,6 +187,7 @@ function Form() {
               value={setRollno}
               onChange={() => setRollnoHandler(rollnoRef.current.value)}
               placeholder="Rollno"
+              required
               className={`bg-transparent relative font-medium outline-none focus:outline-none w-full mb-6 rounded-2xl bg-gray-50 p-3 ring-2 ${
                 isRollno ? "ring-red-500" : "ring-gray-200"
               } border-2 border-transparent`}
@@ -203,6 +205,7 @@ function Form() {
               value={setPhoneno}
               onChange={() => setPhonenoHandler(phonenoRef.current.value)}
               type="text"
+              required
               placeholder="Phone number"
               className={`bg-transparent relative font-medium outline-none focus:outline-none w-full mb-6 rounded-2xl bg-gray-50 p-3 ring-2 ${
                 isPhoneno ? "ring-red-500" : "ring-gray-200"
@@ -221,6 +224,7 @@ function Form() {
               value={setDepartment}
               onChange={() => setDepartmentHandler(deptRef.current.value)}
               type="text"
+              required
               placeholder="Department (Ex. IT, CSE)"
               className="font-medium bg-transparent outline-none focus:outline-none w-full relative mb-6 p-3 rounded-2xl bg-gray-50 border-2 border-transparent ring-2 ring-gray-200"
             />
