@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 * {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -45,4 +46,24 @@
   100% {
     opacity: 0;
   }
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #fff;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #013a63;
+  border-radius: 2px;
+}
+
+textarea::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9fafb;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgb(182, 182, 182);
+  border-radius: 10px;
 }
