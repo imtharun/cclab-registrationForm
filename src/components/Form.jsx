@@ -26,6 +26,7 @@ function Form() {
   const [isName, setIsName] = useState(false);
   const [isRollno, setIsRollno] = useState(false);
   const [isPhoneno, setIsPhoneno] = useState(false);
+  console.log(isName, isRollno, isPhoneno);
 
   useEffect(() => {
     init(typeRef.current, {
@@ -351,7 +352,7 @@ function Form() {
               rotateTouch={true}
             >
               <motion.button
-                disabled={isName && isPhoneno && isRollno}
+                disabled={isName || isPhoneno || isRollno}
                 className="w-full border-transparent rounded-2xl bg-[#176698] py-3 font-bold text-white hover:border-[#176698] border-2 hover:bg-white hover:text-[#176698] transition-colors"
                 whileTap={{ scale: 0.95 }}
                 type="submit"
