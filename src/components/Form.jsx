@@ -26,7 +26,6 @@ function Form() {
   const [isName, setIsName] = useState(false);
   const [isRollno, setIsRollno] = useState(false);
   const [isPhoneno, setIsPhoneno] = useState(false);
-  console.log(isName, isRollno, isPhoneno);
 
   useEffect(() => {
     init(typeRef.current, {
@@ -408,13 +407,3 @@ function Form() {
 }
 
 export default Form;
-
-//  <textarea
-//   ref={interestRef}
-//   value={setInterest}
-//   onChange={() => setInterestHandler(interestRef.current.value)}
-//   type="text"
-//   placeholder="Interests"
-//   className="my-3 w-full font-medium border-none bg-transparent outline-none focus:outline-none min-h-fit"
-//   rows={3}
-// />
