@@ -5,65 +5,65 @@
 @tailwind utilities;
 
 * {
-  scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
 }
 
 .bg-grad {
-  background: linear-gradient(359.69deg, #176698 3.03%, #a9d6e500 99.49%);
+    background: linear-gradient(359.69deg, #176698 3.03%, #a9d6e500 99.49%);
 }
 
 .ityped-cursor {
-  font-size: 2.2rem;
-  opacity: 1;
-  -webkit-animation: blink 0.3s infinite;
-  -moz-animation: blink 0.3s infinite;
-  animation: blink 0.3s infinite;
-  animation-direction: alternate;
+    font-size: 2.2rem;
+    opacity: 1;
+    -webkit-animation: blink 0.3s infinite;
+    -moz-animation: blink 0.3s infinite;
+    animation: blink 0.3s infinite;
+    animation-direction: alternate;
 }
 
 .ring-gray-200 {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity));
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity));
 }
 
 @keyframes blink {
-  100% {
-    opacity: 0;
-  }
+    100% {
+        opacity: 0;
+    }
 }
 
 @-webkit-keyframes blink {
-  100% {
-    opacity: 0;
-  }
+    100% {
+        opacity: 0;
+    }
 }
 
 @-moz-keyframes blink {
-  100% {
-    opacity: 0;
-  }
+    100% {
+        opacity: 0;
+    }
 }
 
 body::-webkit-scrollbar {
-  width: 10px;
-  background-color: #fff;
+    width: 10px;
+    background-color: #fff;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #013a63;
-  border-radius: 2px;
+    background-color: #013a63;
+    border-radius: 2px;
 }
 
 textarea::-webkit-scrollbar {
-  width: 10px;
-  background-color: #f9fafb;
+    width: 10px;
+    background-color: #f9fafb;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background-color: rgb(182, 182, 182);
-  border-radius: 10px;
+    background-color: rgb(182, 182, 182);
+    border-radius: 10px;
 }
